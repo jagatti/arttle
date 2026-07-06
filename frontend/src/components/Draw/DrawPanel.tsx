@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import type { DrawingData, Stroke } from "@/types/game";
 
@@ -90,7 +90,7 @@ export function DrawPanel(props: {
     };
   };
 
-  const submit = () => {
+  const submit = useCallback(() => {
     if (submittedRef.current) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -98,11 +98,11 @@ export function DrawPanel(props: {
     if (!ctx) return;
     submittedRef.current = true;
     props.onComplete({ drawing: drawingData, imageDataUrl: canvas.toDataURL("image/png"), imageData: ctx.getImageData(0, 0, CANVAS_SIZE, CANVAS_SIZE) });
-  };
+  }, [drawingData, props]);
 
   useEffect(() => {
     if (props.seconds <= 0) submit();
-  }, [props.seconds]);
+  }, [props.seconds, submit]);
 
   return (
     <section className="space-y-3 rounded-lg border p-4">

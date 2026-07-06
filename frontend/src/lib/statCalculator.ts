@@ -145,7 +145,7 @@ export function calculateStatsFromDrawing(drawing: DrawingData, imageData: Image
   attack = clamp(Math.round(attack), 50, 200);
   defense = clamp(Math.round(defense), 50, 200);
   speed = clamp(Math.round(speed), 20, 50);
-  evasion = clamp(Number(clamp(evasion, 0.03, 0.1).toFixed(3)), 0.03, 0.1);
+  evasion = clamp(Number(evasion.toFixed(3)), 0.03, 0.1);
 
   return {
     hp,

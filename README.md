@@ -22,7 +22,7 @@ PS2「ラクガキ王国」風の 1vs1 オンライン対戦ゲームです。�
 ### 1) シグナリングサーバー
 
 ```bash
-cd /home/runner/work/arttle/arttle/signaling-server
+cd signaling-server
 npm install
 npm run dev
 ```
@@ -32,7 +32,7 @@ npm run dev
 ### 2) フロントエンド
 
 ```bash
-cd /home/runner/work/arttle/arttle/frontend
+cd frontend
 cp .env.local.example .env.local
 npm install
 npm run dev
@@ -49,14 +49,14 @@ NEXT_PUBLIC_SIGNALING_SERVER_URL=ws://localhost:8080
 ## テスト / 検証
 
 ```bash
-cd /home/runner/work/arttle/arttle/frontend
+cd frontend
 npm run test
 npm run lint
 npm run build
 ```
 
 ```bash
-cd /home/runner/work/arttle/arttle/signaling-server
+cd signaling-server
 npm run build
 ```
 

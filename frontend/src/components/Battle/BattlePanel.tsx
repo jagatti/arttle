@@ -12,6 +12,8 @@ const ACTION_LABELS: Record<ActionType, string> = {
   charge: "チャージ",
 };
 
+const safeImageUrl = (value: string) => (value.startsWith("data:image/") ? value : "");
+
 export function BattlePanel(props: {
   me: PlayerBattleState;
   enemy: PlayerBattleState;
@@ -33,7 +35,11 @@ export function BattlePanel(props: {
         {[props.me, props.enemy].map((player) => (
           <article key={player.id} className="rounded border p-3">
             <h3 className="font-semibold">{player.nickname}</h3>
-            <img src={player.imageDataUrl} alt={`${player.nickname} のキャラクター`} className="my-2 h-32 w-32 rounded border bg-white object-contain" />
+            <img
+              src={safeImageUrl(player.imageDataUrl)}
+              alt={`${player.nickname} のキャラクター`}
+              className="my-2 h-32 w-32 rounded border bg-white object-contain"
+            />
             <p>HP: {player.currentHp}/{player.stats.maxHp}</p>
             <p>PP: {player.currentPp}/{player.stats.maxPp}</p>
             <p>攻: {player.stats.attack} / 防: {player.stats.defense}</p>

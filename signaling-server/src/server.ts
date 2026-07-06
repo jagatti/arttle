@@ -15,7 +15,7 @@ interface Room {
 }
 
 const PORT = Number(process.env.PORT ?? 8080);
-const ROOM_TTL_MS = 100 * 1000;
+const ROOM_TTL_SECONDS = 100;
 
 const clients = new Map<string, Client>();
 const rooms = new Map<string, Room>();
@@ -39,7 +39,7 @@ const randomRoomCode = () => {
 const cleanupExpiredRooms = () => {
   const now = Date.now();
   for (const [code, room] of rooms.entries()) {
-    if (!room.guestId && now - room.createdAt > ROOM_TTL_MS) {
+    if (!room.guestId && now - room.createdAt > ROOM_TTL_SECONDS * 1000) {
       rooms.delete(code);
       const host = clients.get(room.hostId);
       if (host) {

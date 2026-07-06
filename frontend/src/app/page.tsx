@@ -98,10 +98,10 @@ export default function Home() {
 
   const finalizeTurn = (turnNumber: number) => {
     if (roleRef.current !== "host") return;
-    const current = { ...pendingActionsRef.current };
+    const current = pendingActionsRef.current;
     const myId = myIdRef.current;
     const enemyId = peerIdRef.current;
-    const currentBattle = { ...battleState };
+    const currentBattle = structuredClone(battleState);
     if (!currentBattle[myId] || !currentBattle[enemyId]) return;
 
     const fillAction = (id: string): ActionType => {
